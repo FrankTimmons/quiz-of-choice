@@ -3,12 +3,14 @@ import { collection, addDoc, doc, onSnapshot, deleteDoc, updateDoc } from "fireb
 import db from "../firebase";
 import QuizList from "./QuizList";
 import NewQuizForm from "./NewQuizForm";
+import QuizDetail from "./QuizDetail";
 
 function QuizControl() {
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
   const [mainQuizList, setMainQuizList] = useState([]);
   const [error, setError] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -32,13 +34,13 @@ function QuizControl() {
 
   const handleClick = () => {
     setFormVisibleOnPage(!formVisibleOnPage);
-    // if (selectedTicket != null) {
-    //   setFormVisibleOnPage(false);
-    //   setSelectedTicket(null);
-    //   setEditing(false);
-    // } else {
-    //   setFormVisibleOnPage(!formVisibleOnPage);
-    // }
+    if (selectedQuiz != null) {
+      setFormVisibleOnPage(false);
+      setSelectedQuiz(null);
+      setEditing(false);
+    } else {
+      setFormVisibleOnPage(!formVisibleOnPage);
+    }
   }
 
   const handleAddingNewQuizToList = async (newQuizData) => {
@@ -52,17 +54,31 @@ function QuizControl() {
     setSelectedQuiz(selection);
   }
 
+  const handleAddingNewAnswerToList = async (newAnswerData) => {
+    const collectionRef = collection(db, "answers");
+    await addDoc(collectionRef, newAnswerData);
+    setFormVisibleOnPage(false);
+    setSelectedQuiz(null);
+  }
+
   let currentlyVisibleState = null;
   let buttonText = null; 
 
   if(error){
     currentlyVisibleState = <p>There was an error: {error}</p>
+  } else if (selectedQuiz != null) {
+    currentlyVisibleState= <QuizDetail
+    quiz={selectedQuiz} 
+    // onClickingDelete={handleDeletingquiz}
+    // onClickingEdit = {handleEditClick} 
+    onNewAnswerCreation = {handleAddingNewAnswerToList} />
+    buttonText = "Return to quiz List";
   } else if (formVisibleOnPage) {
     currentlyVisibleState = <NewQuizForm onNewQuizCreation={handleAddingNewQuizToList}/>;
-    buttonText = "Return to Ticket List"; 
+    buttonText = "Return to Quiz List"; 
   } else {
     currentlyVisibleState = <QuizList onQuizSelection={handleChangingSelectedQuiz} quizList={mainQuizList} />;
-    buttonText = "Add Ticket"; 
+    buttonText = "Add Quiz"; 
   }
 
   return (
