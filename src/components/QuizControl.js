@@ -51,6 +51,7 @@ function QuizControl() {
     const selection = mainQuizList.filter(quiz => quiz.id === id)[0];
     setSelectedQuiz(selection);
   }
+
   let currentlyVisibleState = null;
   let buttonText = null; 
 

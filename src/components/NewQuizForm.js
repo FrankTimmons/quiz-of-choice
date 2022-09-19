@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types"; 
+import ReusableForm from "./ReusableQuizForm";
 
 function NewQuizForm(props){
 
@@ -18,37 +19,7 @@ function NewQuizForm(props){
 
   return (
     <React.Fragment>
-      <form onSubmit={handleNewQuizFormSubmission}>
-        <input
-          type='text'
-          name='name'
-          placeholder='Enter name of quiz' />   
-        <input
-          type='text'
-          name='question1'
-          placeholder='Question 1' />
-        <input
-          type='text'
-          name='answer1'
-          placeholder='Answer 1' />
-        <input
-          type='text'
-          name='question2'
-          placeholder='Question 2' />
-        <input
-          type='text'
-          name='answer2'
-          placeholder='Answer 2' />
-        <input
-          type='text'
-          name='question3'
-          placeholder='Question 3' />
-        <input
-          type='text'
-          name='answer3'
-          placeholder='Answer 3' />
-        <button type='submit'>Submit Quiz</button>
-      </form>
+      <ReusableForm formSubmissionHandler={handleNewQuizFormSubmission} buttonText={"Add Quiz"}/>
     </React.Fragment>
   );
 }
