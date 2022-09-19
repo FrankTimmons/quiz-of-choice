@@ -6,6 +6,7 @@ function NewQuizForm(props){
   function handleNewQuizFormSubmission(event) {
     event.preventDefault();
     props.onNewQuizCreation({
+      name: event.target.name.value,
       question1: event.target.question1.value,
       question2: event.target.question2.value,
       question3: event.target.question3.value,
@@ -20,8 +21,8 @@ function NewQuizForm(props){
       <form onSubmit={handleNewQuizFormSubmission}>
         <input
           type='text'
-          name='question1'
-          placeholder='Question 1' />
+          name='name'
+          placeholder='Enter name of quiz' />   
         <input
           type='text'
           name='answer1'
