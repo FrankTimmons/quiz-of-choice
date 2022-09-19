@@ -25,6 +25,10 @@ function NewQuizForm(props){
           placeholder='Enter name of quiz' />   
         <input
           type='text'
+          name='question1'
+          placeholder='Question 1' />
+        <input
+          type='text'
           name='answer1'
           placeholder='Answer 1' />
         <input
