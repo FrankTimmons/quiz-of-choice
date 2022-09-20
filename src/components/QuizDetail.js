@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import PropTypes from "prop-types";
-import { auth } from "./../firebase.js";
+import { db, auth } from "./../firebase.js";
+import { v4 } from 'uuid';
 
 function QuizDetail(props){
   const { quiz, onClickingDelete, onClickingEdit } = props; 
+  const [answerList, setAnswerList] = useState(null);
+  let showButtons = null;
+  let showAnswers = null;
+
+  const getAnswers = async () => {
+    const q = query(collection(db, "answers"), where("quizId", "==", quiz.id))
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+
+    let newAnswerList = [];
+    querySnapshot.forEach((doc) => {
+      newAnswerList.push(
+      <ol>
+        <li key={v4()}>{doc.data().answer1}</li>
+        <li key={v4()}>{doc.data().answer2}</li>
+        <li key={v4()}>{doc.data().answer3}</li>
+      </ol>
+      )
+    })
+    setAnswerList(newAnswerList);
+    console.log(answerList);
+  }
 
   function handleNewAnswerFormSubmission(event) {
     event.preventDefault();
@@ -14,13 +41,13 @@ function QuizDetail(props){
       quizId: quiz.id
     });
   }
-  let showButtons = null;
 
   if(auth.currentUser.email === quiz.creator){
     showButtons = 
     <>
       <button onClick={onClickingEdit}>Update Quiz</button>
       <button onClick={()=> onClickingDelete(quiz.id)}>Delete Quiz</button>
+      <button onClick={getAnswers}>Show Answers</button>
     </>
   }
 
@@ -47,6 +74,7 @@ function QuizDetail(props){
       </form>
       {/* if you're the creator of the quiz, show a list of submitted answers for the quiz.  We'd have to import the database, and loop through the answer collection to find answers with the matching quiz id. */}
       <hr/>
+      {answerList}
       {showButtons}
     </React.Fragment>
   );

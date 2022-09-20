@@ -61,7 +61,7 @@ function QuizControl() {
   const handleAddingNewAnswerToList = async (newAnswerData) => {
     const collectionRef = collection(db, "answers");
     await addDoc(collectionRef, newAnswerData);
-    setCurrentAnswer(newAnswerData);
+    // setCurrentAnswer(newAnswerData);
     setFormVisibleOnPage(false);
     setSelectedQuiz(null);
     // logic to show a component that has the correct answers for the quiz you just took, and shows your answers alongside them.
