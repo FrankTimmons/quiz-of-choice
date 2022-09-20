@@ -1,28 +1,29 @@
 import React from "react";
-import Quiz from "./Quiz";
 import PropTypes from "prop-types";
+import { auth } from "./../firebase.js";
+import Quiz from "./Quiz.js";
 
-function QuizList(props){
+function MyQuizList(props) {
+  const myQuizList = props.quizList.filter(quiz => auth.currentUser.email === quiz.creator);
 
   return(
     <React.Fragment>
       <hr/>
-      {props.quizList.map((quiz) =>
+      {myQuizList.map((quiz) => 
         <Quiz 
           whenQuizClicked={props.onQuizSelection}
           name={quiz.name}
           id={quiz.id}
           key={quiz.id}/>
       )}
-      <button onClick={props.changeVisibleList}>View my quizzes</button>
+      <button onClick={props.changeVisibleList}>View all quizzes</button>
     </React.Fragment>
   );
 }
 
-QuizList.propTypes = {
+MyQuizList.propTypes = {
   quizList: PropTypes.array,
   onQuizSelection: PropTypes.func,
 };
 
-export default QuizList;
-
+export default MyQuizList;

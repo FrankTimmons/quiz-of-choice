@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { auth } from "./../firebase.js";
 
 function QuizDetail(props){
   const { quiz, onClickingDelete, onClickingEdit } = props; 
@@ -13,7 +14,15 @@ function QuizDetail(props){
       quizId: quiz.id
     });
   }
+  let showButtons = null;
 
+  if(auth.currentUser.email === quiz.creator){
+    showButtons = 
+    <>
+      <button onClick={onClickingEdit}>Update Quiz</button>
+      <button onClick={()=> onClickingDelete(quiz.id)}>Delete Quiz</button>
+    </>
+  }
 
   return (
     <React.Fragment>
@@ -36,6 +45,7 @@ function QuizDetail(props){
           placeholder='Answer' />
         <button type='submit'>Submit your answers!</button>
       </form>
+      {showButtons}
     </React.Fragment>
   );
 }
