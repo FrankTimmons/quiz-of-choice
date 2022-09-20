@@ -45,6 +45,8 @@ function QuizDetail(props){
           placeholder='Answer' />
         <button type='submit'>Submit your answers!</button>
       </form>
+      {/* if you're the creator of the quiz, show a list of submitted answers for the quiz.  We'd have to import the database, and loop through the answer collection to find answers with the matching quiz id. */}
+      <hr/>
       {showButtons}
     </React.Fragment>
   );
