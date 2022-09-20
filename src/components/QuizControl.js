@@ -6,6 +6,7 @@ import NewQuizForm from "./NewQuizForm";
 import QuizDetail from "./QuizDetail";
 import EditQuizForm from "./EditQuizForm.js";
 import MyQuizList from "./MyQuizList.js";
+import AnswerKey from "./AnswerKey.js";
 
 function QuizControl() {
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
@@ -40,6 +41,7 @@ function QuizControl() {
     setFormVisibleOnPage(!formVisibleOnPage);
     if (selectedQuiz != null) {
       setFormVisibleOnPage(false);
+      setCurrentAnswer(null);
       setSelectedQuiz(null);
       setEditing(false);
     } else {
@@ -61,9 +63,8 @@ function QuizControl() {
   const handleAddingNewAnswerToList = async (newAnswerData) => {
     const collectionRef = collection(db, "answers");
     await addDoc(collectionRef, newAnswerData);
-    // setCurrentAnswer(newAnswerData);
+    setCurrentAnswer(newAnswerData);
     setFormVisibleOnPage(false);
-    setSelectedQuiz(null);
     // logic to show a component that has the correct answers for the quiz you just took, and shows your answers alongside them.
   }
 
@@ -102,7 +103,8 @@ function QuizControl() {
     if (error) {
       currentlyVisibleState = <p>There was an error: {error}</p>
     } else if (currentAnswer != null){
-      // set currentlyvisiblestate to answer key component. Pass the current answer and quiz down as props so we can compare them, and display them.
+      currentlyVisibleState = <AnswerKey answer={currentAnswer} quiz={selectedQuiz} />;
+      buttonText = "Return to Quiz List";
     } else if (editing) {      
       currentlyVisibleState = <EditQuizForm quiz={selectedQuiz} onEditQuiz={handleEditingQuizInList} />
       buttonText = "Return to Quiz List";
