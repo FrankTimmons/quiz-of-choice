@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { collection, addDoc, doc, onSnapshot, deleteDoc, updateDoc } from "firebase/firestore";
-import db from "../firebase";
+import { db, auth } from "./../firebase.js";
 import QuizList from "./QuizList";
 import NewQuizForm from "./NewQuizForm";
 import QuizDetail from "./QuizDetail";
@@ -61,32 +61,42 @@ function QuizControl() {
     setSelectedQuiz(null);
   }
 
-  let currentlyVisibleState = null;
-  let buttonText = null; 
+  
+  if (auth.currentUser == null) {
+    return (
+      <React.Fragment>
+        <h1>You must be signed in to access Quizzes</h1>
+      </React.Fragment>
+    )
+  } else if (auth.currentUser != null) {
 
-  if(error){
-    currentlyVisibleState = <p>There was an error: {error}</p>
-  } else if (selectedQuiz != null) {
-    currentlyVisibleState= <QuizDetail
-    quiz={selectedQuiz} 
-    // onClickingDelete={handleDeletingquiz}
-    // onClickingEdit = {handleEditClick} 
-    onNewAnswerCreation = {handleAddingNewAnswerToList} />
-    buttonText = "Return to quiz List";
-  } else if (formVisibleOnPage) {
-    currentlyVisibleState = <NewQuizForm onNewQuizCreation={handleAddingNewQuizToList}/>;
-    buttonText = "Return to Quiz List"; 
-  } else {
-    currentlyVisibleState = <QuizList onQuizSelection={handleChangingSelectedQuiz} quizList={mainQuizList} />;
-    buttonText = "Add Quiz"; 
+    let currentlyVisibleState = null;
+    let buttonText = null; 
+    
+    if(error){
+      currentlyVisibleState = <p>There was an error: {error}</p>
+    } else if (selectedQuiz != null) {
+      currentlyVisibleState= <QuizDetail
+      quiz={selectedQuiz} 
+      // onClickingDelete={handleDeletingquiz}
+      // onClickingEdit = {handleEditClick} 
+      onNewAnswerCreation = {handleAddingNewAnswerToList} />
+      buttonText = "Return to quiz List";
+    } else if (formVisibleOnPage) {
+      currentlyVisibleState = <NewQuizForm onNewQuizCreation={handleAddingNewQuizToList}/>;
+      buttonText = "Return to Quiz List"; 
+    } else {
+      currentlyVisibleState = <QuizList onQuizSelection={handleChangingSelectedQuiz} quizList={mainQuizList} />;
+      buttonText = "Add Quiz"; 
+    }
+  
+    return (
+      <React.Fragment>
+        {currentlyVisibleState}
+        {error ? null : <button onClick={handleClick}>{buttonText}</button>} 
+      </React.Fragment>
+    );   
   }
-
-  return (
-    <React.Fragment>
-      {currentlyVisibleState}
-      {error ? null : <button onClick={handleClick}>{buttonText}</button>} 
-    </React.Fragment>
-  );
 }
 
 export default QuizControl;
