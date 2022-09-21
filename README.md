@@ -1,3 +1,65 @@
+# _quiz-of-choice_
+
+#### By _Frank Timmons & Joe Roaden_
+
+#### _A REACT application that allows a user to sign in, create, delete and update Quizzes, then compare them to the answer key_
+
+
+![image component diagram](component-diagram.drawio)
+
+---
+## Table of Contents
+[Technologies Used](#technologies-used)  
+[Description](#description)  
+[Setup/Installation Requirements](#setup-and-installation-requirements)   
+[Known Bugs](#known-bugs)  
+[License](#License)
+
+---
+## Technologies Used
+
+* _REACT_
+* _JavaScript_
+* _Firebase_
+* _Firestore_
+* _Styled Components_
+* _Authorization and Authentication with Firestore_
+* _HTML_
+* _CSS_
+* _JSX_
+
+
+---
+## Description
+
+_The user can add a new quiz, providing answers at the time of creation.  A list of all quizzes is displayed once a new user has created an account.  The user can then view their list of quizzes from a dashboard view and also take other users quizzes.  A user has full CRUD functionality for all quizzes they create. When taking a new quiz, a user can also view the answer key to quickly compare their answers to the key_
+
+---
+## Setup and Installation Requirements
+
+<details>
+<summary><strong>Initial Setup</strong></summary>  
+
+1. Copy the git repository url: https://github.com/joeroaden/quiz-of-choice
+2. Open a shell program and navigate to your desktop.
+3. Clone the repository for this project using the `git clone` command and including the copied URL.
+4. While still in the shell program, navigate to the root directory of the newly created file named `quiz-of-choice`.
+5. From the root directory, run `npm install` to install all modules that are listed on package. json file and their dependencies
+6. From the root directory, run `npm run start` to view the application on your local live server.
+
+
+---
+## Known Bugs
+
+* _There are no known bugs at this time_
+
+---
+## License
+
+
+
+[Copyright](/LICENSE) © 2022 Frank Timmons & Joe Roaden
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
