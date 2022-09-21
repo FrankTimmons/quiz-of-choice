@@ -3,14 +3,19 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const QuizOfChoiceHeader = styled.h1`
-font-size: 24px;
-text-align: center;
-color: white;
-// background-color: teal;
+  margin: 10px; 
+  font-size: 50px;
+  color: white;
+  // background-color: teal;
 `;
 
 const StyledWrapper = styled.section`
-  background-color: gray;
+  background-color: rgb(130, 180, 255);
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 `;
 
 function Header() {
@@ -18,16 +23,9 @@ function Header() {
     <React.Fragment>
       <StyledWrapper>
       <QuizOfChoiceHeader>
-        Quiz of Choice
+        QUIZ OF CHOICE
       </QuizOfChoiceHeader>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/sign-in">Account</Link>
-          </li>
-        </ul>
+        <p><Link to="/">Home</Link> | <Link to="/sign-in">Account</Link></p>
       </StyledWrapper>
     </React.Fragment>
   );
