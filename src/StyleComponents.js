@@ -9,15 +9,3 @@ export const Button = styled.button`
   margin: 0 1em;
   padding: 0.25em 1em;
 `
-
-const Input = styled.input`
-  font-size: 18px;
-  padding: 10px;
-  margin: 10px;
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-  ::placeholder {
-    color: palevioletred;
-  }
-`;
