@@ -2,7 +2,7 @@
 
 #### By _Frank Timmons & Joe Roaden_
 
-#### _A REACT application that allows a user to sign in, create, delete and update Quizzes, then compare them to the answer key_
+#### _A REACT application that allows a user to sign in, create, delete and update Quizzes, then compare them to the answer key utilizing hooks_
 
 
 ![image component diagram](component-diagram.png)
