@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { auth } from "./../firebase.js";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import * as css from '../StyleComponents'
 
 
 function SignIn(){  
@@ -56,7 +57,7 @@ function SignIn(){
           type='password'
           name='password'
           placeholder='Password' />
-        <button type='submit'>Sign up</button>
+        <css.Button type='submit'>Sign up</css.Button>
       </form> 
 
       <h1>Sign In</h1>
@@ -70,12 +71,12 @@ function SignIn(){
           type='password'
           name='signinPassword'
           placeholder='Password' />
-        <button type='submit'>Sign in</button>
+        <css.Button type='submit'>Sign in</css.Button>
       </form>
       <h1>Sign Out</h1>
       {signOutSuccess}
       <br />
-      <button onClick={doSignOut}>Sign out</button>
+      <css.Button onClick={doSignOut}>Sign out</css.Button>
     </React.Fragment> 
   );
 }

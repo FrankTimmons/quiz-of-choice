@@ -3,6 +3,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { db, auth } from "./../firebase.js";
 import { v4 } from 'uuid';
+import * as css from '../StyleComponents'
 
 function QuizDetail(props){
   const { quiz, onClickingDelete, onClickingEdit } = props; 
@@ -44,9 +45,9 @@ function QuizDetail(props){
   if(auth.currentUser.email === quiz.creator){
     showButtons = 
     <>
-      <button onClick={onClickingEdit}>Update Quiz</button>
-      <button onClick={()=> onClickingDelete(quiz.id)}>Delete Quiz</button>
-      <button onClick={getAnswers}>Show Answers</button>
+      <css.Button onClick={onClickingEdit}>Update Quiz</css.Button>
+      <css.Button onClick={()=> onClickingDelete(quiz.id)}>Delete Quiz</css.Button>
+      <css.Button onClick={getAnswers}>Show Answers</css.Button>
     </>
   }
 
@@ -69,7 +70,7 @@ function QuizDetail(props){
           type='text'
           name='answer3'
           placeholder='Answer' />
-        <button type='submit'>Submit your answers!</button>
+        <css.Button type='submit'>Submit your answers!</css.Button>
       </form>
       <hr/>
       {answerList}

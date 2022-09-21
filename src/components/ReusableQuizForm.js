@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as css from '../StyleComponents'
 
 function ReusableForm(props) {
   return (
@@ -33,7 +34,7 @@ function ReusableForm(props) {
           type='text'
           name='answer3'
           placeholder='Answer 3' />
-        <button type='submit'>{props.buttonText}</button>
+        <css.Button type='submit'>{props.buttonText}</css.Button>
       </form>
     </React.Fragment>
   );

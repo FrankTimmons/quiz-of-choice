@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { auth } from "./../firebase.js";
 import Quiz from "./Quiz.js";
+import * as css from '../StyleComponents';
 
 function MyQuizList(props) {
   const myQuizList = props.quizList.filter(quiz => auth.currentUser.email === quiz.creator);
@@ -16,7 +17,7 @@ function MyQuizList(props) {
           id={quiz.id}
           key={quiz.id}/>
       )}
-      <button onClick={props.changeVisibleList}>View all quizzes</button>
+      <css.Button onClick={props.changeVisibleList}>View all quizzes</css.Button>
     </React.Fragment>
   );
 }

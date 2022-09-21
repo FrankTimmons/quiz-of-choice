@@ -7,6 +7,7 @@ import QuizDetail from "./QuizDetail";
 import EditQuizForm from "./EditQuizForm.js";
 import MyQuizList from "./MyQuizList.js";
 import AnswerKey from "./AnswerKey.js";
+import * as css from '../StyleComponents'
 
 function QuizControl() {
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
@@ -129,7 +130,7 @@ function QuizControl() {
     return (
       <React.Fragment>
         {currentlyVisibleState}
-        {error ? null : <button onClick={handleClick}>{buttonText}</button>} 
+        {error ? null : <css.Button onClick={handleClick}>{buttonText}</css.Button>} 
       </React.Fragment>
     );   
   }
